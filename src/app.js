@@ -1,13 +1,17 @@
 import express, {json, urlencoded} from "express" // Importa Express (framework HTTP) y helpers para parseo
 import {join, dirname} from "path" // Importa utilidades para construir rutas de archivos
+
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser" // Middleware para parsear cookies de las peticiones
 import logger from "morgan" //Middleware para registrar peticiones HTTP en la consola
+import swagger from "swagger-ui-express";
 
 import aboutRouter from "../src/routes/about.js"// Importa el enrutador para la ruta raíz ('/')
 import pingRouter from "../src/routes/ping.js" // Importa el enrutador para la ruta '/users'
 
+import specs from "../swagger/swagger.js";
 import "dotenv/config";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,6 +32,8 @@ app.use(cookieParser());
 
 // Middleware que sirve archivos estáticos desde la carpeta ../public (respecto a __dirname)
 app.use(express.static(join(__dirname, '../public')));
+
+app.use("/api-docs", swagger.serve, swagger.setup(specs));
 
 app.use('/about', aboutRouter);
 app.use('/ping', pingRouter);
