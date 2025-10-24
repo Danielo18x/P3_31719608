@@ -34,7 +34,6 @@ app.use(cookieParser());
 app.use(express.static(join(__dirname, '../public')));
 
 app.use("/api-docs", swagger.serve, swagger.setup(specs));
-
 app.use('/about', aboutRouter);
 app.use('/ping', pingRouter);
 // Exporta la instancia de la app para que pueda ser usada por el servidor (bin/www u otro)
