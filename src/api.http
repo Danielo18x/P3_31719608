@@ -17,15 +17,16 @@ Content-Type: application/json
 }
 
 ###
-PUT http://localhost:3000/users/8
+PUT http://localhost:3000/users/12
 Content-Type: application/json
 
 {
-    "email": "jhon2@gmail.com"
+    "name": "Arelys",
+    "email": "arelys@gmail.com"
 }
 
 ###
-DELETE http://localhost:3000/users/1
+DELETE http://localhost:3000/users/4
 
 ###
 POST http://localhost:3000/auth/register
