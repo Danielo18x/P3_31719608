@@ -1,3 +1,29 @@
 GET http://localhost:3000/about
 
+###
 GET http://localhost:3000/ping
+
+###
+GET http://localhost:3000/users
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "securepassword123"
+}
+
+###
+PUT http://localhost:3000/users/1
+Content-Type: application/json
+
+{
+    "name": "Dani"
+}
+
+###
+DELETE http://localhost:3000/users/1
+
