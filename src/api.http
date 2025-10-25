@@ -4,24 +4,24 @@ GET http://localhost:3000/about
 GET http://localhost:3000/ping
 
 ###
-GET http://localhost:3000/users
+GET http://localhost:3000/users/
 
 ###
 POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "name": "John Doe",
-    "email": "john.doe@example.com",
+    "name": "Jose",
+    "email": "jose@gmail.com",
     "password": "securepassword123"
 }
 
 ###
-PUT http://localhost:3000/users/1
+PUT http://localhost:3000/users/8
 Content-Type: application/json
 
 {
-    "name": "Dani"
+    "email": "jhon2@gmail.com"
 }
 
 ###
@@ -33,7 +33,7 @@ Content-Type: application/json
 
 {
     "name": "Antonio",
-    "email": "antonito@gmail.com",
+    "email": "antonito12@gmail.com",
     "password": "antonio123"
 }
 
