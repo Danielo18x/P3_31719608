@@ -27,3 +27,21 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/users/1
 
+###
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+    "name": "Antonio",
+    "email": "antonito@gmail.com",
+    "password": "antonio123"
+}
+
+###
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+    "name": "Antonio",
+    "password": "antonio123"
+}

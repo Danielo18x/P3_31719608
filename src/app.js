@@ -9,6 +9,7 @@ import swagger from "swagger-ui-express";
 import aboutRouter from "../src/routes/about.js"// Importa el enrutador para la ruta raíz ('/')
 import pingRouter from "../src/routes/ping.js" // Importa el enrutador para la ruta '/users'
 import userRouter from "../src/routes/user.js"
+import registerRouter  from "../src/routes/auth.js";
 
 import specs from "../swagger/swagger.js";
 import "dotenv/config";
@@ -38,5 +39,6 @@ app.use("/api-docs", swagger.serve, swagger.setup(specs));
 app.use('/about', aboutRouter);
 app.use('/ping', pingRouter);
 app.use('/users', userRouter);
+app.use('/auth', registerRouter);
 // Exporta la instancia de la app para que pueda ser usada por el servidor (bin/www u otro)
 export default app
