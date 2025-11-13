@@ -7,7 +7,7 @@ var router = Router();
  * /about:
  *   get:
  *     summary: Obtiene información de la aplicación/autor
- *     description: Devuelve los datos descriptivos cargados desde services/about.json.
+ *     description: Devuelve los datos descriptivos del autor.
  *     tags:
  *       - Información
  *     responses:
