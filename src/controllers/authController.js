@@ -51,7 +51,8 @@ export async function login(req, res){
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
         })
-        .json({name, token});
+        //.json({name, token});
+        .send({name})
     } catch (error) {
         res.status(400).json({errors: error})
     }

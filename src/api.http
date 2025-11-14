@@ -3,6 +3,7 @@ GET http://localhost:3000/about
 ###
 GET http://localhost:3000/ping
 
+//users
 ###
 GET http://localhost:3000/users/
 
@@ -15,6 +16,9 @@ Content-Type: application/json
     "email": "jose@gmail.com",
     "password": "securepassword123"
 }
+
+###
+GET http://localhost:3000/users/22
 
 ###
 PUT http://localhost:3000/users/12
@@ -46,3 +50,53 @@ Content-Type: application/json
     "name": "Admin",
     "password": "admin123"
 }
+
+//categories
+
+###
+GET http://localhost:3000/categories
+
+###
+POST http://localhost:3000/categories
+Content-Type: application/json
+
+{
+    "name": "Vehiculos y Pistas",
+    "description": "Juguetes suaves y abrazables que transmiten ternura y compañía. Incluyen ositos, muñecas y personajes de películas o animales de peluche."
+}
+
+###
+PUT http://localhost:3000/categories/2
+Content-Type: application/json
+
+{
+    "description": "Carritos, trenes, aviones y pistas de carreras. Ideales para la imaginación y el juego dinámico, con colecciones como Hot Wheels o trenes eléctricos."
+}
+
+###
+DELETE http://localhost:3000/categories/2
+
+//tags
+
+###
+GET http://localhost:3000/tags
+
+###
+POST http://localhost:3000/tags
+Content-Type: application/json
+
+{
+    "name": "Educativo"
+}
+
+###
+PUT http://localhost:3000/tags/2
+Content-Type: application/json
+
+{
+    "name": "Clásico"
+}
+
+###
+DELETE http://localhost:3000/tags/2
+

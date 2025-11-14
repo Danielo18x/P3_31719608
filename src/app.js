@@ -10,6 +10,8 @@ import aboutRouter from "../src/routes/about.js"// Importa el enrutador para la 
 import pingRouter from "../src/routes/ping.js" // Importa el enrutador para la ruta '/users'
 import userRouter from "../src/routes/user.js"
 import registerRouter  from "../src/routes/auth.js";
+import categoriesRouter from "../src/routes/categories.js"
+import tagsRouter from "../src/routes/tags.js"
 
 import specs from "../swagger/swagger.js";
 import "dotenv/config";
@@ -40,5 +42,7 @@ app.use('/about', aboutRouter);
 app.use('/ping', pingRouter);
 app.use('/users', userRouter);
 app.use('/auth', registerRouter);
+app.use('/categories', categoriesRouter);
+app.use('/tags', tagsRouter);
 // Exporta la instancia de la app para que pueda ser usada por el servidor (bin/www u otro)
 export default app

@@ -1,9 +1,7 @@
-import {PrismaClient} from "@prisma/client"
 import UserRepository from "../repositories/userRepository.js"
 import bcrypt from "bcrypt"
 
 const userRepo = new UserRepository()
-const prisma = new PrismaClient()
 
 export async function getUser(req, res) {
     try{
