@@ -14,10 +14,46 @@ datasource db {
 }
 
 model user {
-  id         Int      @id @default(autoincrement())
-  name       String
-  email      String   @unique
-  password   String
-  rol        String @default("user")
+  id Int @id @default(autoincrement())
+  name String
+  email String   @unique
+  password String
+  rol String @default("user")
+}
+
+model Product {
+  id Int @id @default(autoincrement())
+  name String
+  slug String  @unique
+  description String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  tags ProductTags[]
+  ageRange Int
+  price Float
+  stock Int
+  sku String @unique
+}
+
+model Category {
+  id Int @id @default(autoincrement())
+  name String @unique
+  description String
+  products Product[]
+}
+
+model Tag {
+  id Int @id @default(autoincrement())
+  name String @unique
+  products ProductTags[]
+}
+
+model ProductTags{
+  product Product @relation(fields: [productId], references: [id]) 
+  productId Int 
+  tag Tag @relation(fields: [tagId], references: [id])
+  tagId Int
+
+  @@id([productId, tagId])
 }
 
