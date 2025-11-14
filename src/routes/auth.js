@@ -52,10 +52,7 @@ router.post('/register', register)
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 name:
- *                   type: string
+ *               $ref: '#/components/schemas/SucessResponse'
  *       400:
  *         description: Credenciales inválidas o error en autenticación.
  *         content:
@@ -72,3 +69,5 @@ router.post('/register', register)
 router.post('/login', login)
 
 export default router;
+
+

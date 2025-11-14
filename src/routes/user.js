@@ -29,7 +29,7 @@ router.use(valideUser);
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/FailResponse'
+ *               $ref: '#/components/schemas/ErrorResponse'
  */
 router.get('/', getUser);
 

@@ -33,9 +33,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name": "Antonio",
-    "email": "antonito12@gmail.com",
-    "password": "antonio123"
+    "name": "Admin",
+    "email": "admin@gmail.com",
+    "password": "admin123"
 }
 
 ###
@@ -43,6 +43,6 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "name": "Antonio",
-    "password": "antonio123"
+    "name": "Admin",
+    "password": "admin123"
 }

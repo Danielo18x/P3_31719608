@@ -16,7 +16,7 @@ const options = {
                     description: "Local server",
                 },
             ],
-            components: undefined,
+            components: undefined
         },
         components: {
             schemas: {
@@ -64,7 +64,7 @@ const options = {
                 SucessResponse: {
                     type: "object",
                     properties: {
-                        name: { type: "string", example: "danilo" },
+                        name: { type: "string", example: "string" },
                         token: { type: "string", example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..." }
                     }
                 }
@@ -77,6 +77,7 @@ const options = {
                 }
             },
         },
+        security: [{bearerAuth: []}]
     },
     apis: ["./src/routes/*.js"],
 };
