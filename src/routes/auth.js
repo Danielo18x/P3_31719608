@@ -15,14 +15,14 @@ var router = Router();
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/RegisterDTO'
+ *             $ref: '#/components/schemas/CreateUserDTO'
  *     responses:
  *       200:
  *         description: Usuario creado correctamente
  *         content:
  *           application/json:
  *             schema:
- *               $ref: '#/components/schemas/User'
+ *               $ref: '#/components/schemas/AuthRegister'
  *       500:
  *         description: Error interno del servidor al crear el usuario.
  *         content:

@@ -81,7 +81,7 @@ router.get('/:id', getUserById);
  *       content:
  *         application/json:
  *           schema:
- *             $ref: '#/components/schemas/RegisterDTO'
+ *             $ref: '#/components/schemas/CreateUserDTO'
  *     responses:
  *       200:
  *         description: Usuario creado
