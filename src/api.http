@@ -70,11 +70,12 @@ PUT http://localhost:3000/categories/2
 Content-Type: application/json
 
 {
-    "description": "Carritos, trenes, aviones y pistas de carreras. Ideales para la imaginación y el juego dinámico, con colecciones como Hot Wheels o trenes eléctricos."
+    "description": "Carritos, trenes, aviones y pistas de carreras para juego dinámico."
 }
 
 ###
-DELETE http://localhost:3000/categories/2
+DELETE http://localhost:3000/categories/6
+
 
 //tags
 
@@ -85,10 +86,11 @@ GET http://localhost:3000/tags
 POST http://localhost:3000/tags
 Content-Type: application/json
 
-{
-    "name": "Educativo"
-}
 
+{
+    "name": "Infantil"
+}
+    
 ###
 PUT http://localhost:3000/tags/2
 Content-Type: application/json
@@ -100,3 +102,41 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/tags/2
 
+//products
+
+###
+POST http://localhost:3000/products
+Content-Type: application/json
+
+{
+    "name": "Playmobil Castillo Medieval",
+    "description": "Set de juego con caballeros, armas y murallas para recrear batallas.",
+    "categoryId": 2,
+    "ageRange": 7,
+    "price": 74.99,
+    "stock": 20,
+    "sku": "PLAYMOBIL-001",
+    "tags": [2, 3, 6] 
+}
+
+###
+GET http://localhost:3000/products/1
+
+###
+PUT http://localhost:3000/products/1
+Content-Type: application/json
+
+{
+    "name": "LEGO Star Wars X-Wing",
+    "slug": "lego-star-wars-xwing",
+    "description": "Set de construcción con 700 piezas inspirado en la saga Star Wars.",
+    "categoryId": 1,
+    "ageRange": 8,
+    "price": 89.99,
+    "stock": 15,
+    "sku": "LEGO-001",
+    "tags": [1, 4, 6] 
+}
+
+###
+DELETE http://localhost:3000/products/2
