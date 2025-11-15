@@ -38,6 +38,5 @@ app.use('/users', userRouter);
 app.use('/auth', registerRouter);
 app.use('/categories', categoriesRouter);
 app.use('/tags', tagsRouter);
-app.use('/', productsRouter); // /products
-
+app.use('/', productsRouter);
 export default app
