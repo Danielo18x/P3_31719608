@@ -40,7 +40,7 @@ export async function login(req, res){
             }) 
         }
         const token = jwt.sign(
-            {name: user.name, id: user.id/* , rol : user.rol*/},
+            {name: user.name, id: user.id, rol : user.rol},
             process.env.JWT_SECRET_KEY,
             {expiresIn: "1h"}
         );
@@ -52,7 +52,6 @@ export async function login(req, res){
             sameSite: "strict",
         })
         .send({name, token});
-        //.send({name})
     } catch (error) {
         res.status(400).json({errors: error})
     }
