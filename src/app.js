@@ -13,6 +13,7 @@ import registerRouter  from "../src/routes/auth.js";
 import categoriesRouter from "../src/routes/categories.js"
 import tagsRouter from "../src/routes/tags.js"
 import productsRouter from "../src/routes/products.js"
+import cors from "cors";
 
 import specs from "../swagger/swagger.js";
 import "dotenv/config";
@@ -23,6 +24,13 @@ const __dirname = dirname(__filename);
 
 var app = express(); 
 app.disable("x-powered-by");
+
+app.use(
+    cors({
+        origin: true,
+        credentials: true,
+    })
+)
 
 
 app.use(logger('dev'));
