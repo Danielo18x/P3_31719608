@@ -9,6 +9,7 @@ const options = {
       description: "Documentación OpenAPI de la API — incluye recursos públicos y privados",
     },
     servers: [
+      { url: "https://p3-31719608.onrender.com", description: "Servidor API" },
       { url: "http://localhost:3000", description: "Servidor local" }
     ],
     components: {
