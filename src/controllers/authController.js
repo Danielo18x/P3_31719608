@@ -1,9 +1,9 @@
-import {PrismaClient} from "@prisma/client"
+//import {PrismaClient} from "@prisma/client"
 import AuthRepository from "../repositories/authRepository.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 
-const prisma =  new PrismaClient()
+//const prisma =  new PrismaClient()
 const authRepo = new AuthRepository()
 
 export async function register(req, res){
