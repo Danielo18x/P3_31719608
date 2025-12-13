@@ -85,7 +85,9 @@ export async function updateProduct(req, res) {
         if(req.body.name) {
             req.body.slug = generateSlug(req.body.name);
         }
-        const putProduct = await prodRepo.productUpdate(req.params.id, req.body);
+        const data = req.body
+        data.id = req.params.id
+        const putProduct = await prodRepo.productUpdate(data);
         res.status(200).json(putProduct)
     } catch (error) {
         res.status(500).json({

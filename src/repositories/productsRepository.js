@@ -50,10 +50,10 @@ export default class ProductsRepository {
         });
     }
     
-    async productUpdate (id, data) {
+    async productUpdate (data) {
         return await this.model.update({
             where: {
-                id: parseInt(id)
+                id: parseInt(data.id)
             },
             data: {
                 name: data.name,
@@ -90,4 +90,30 @@ export default class ProductsRepository {
         });
     }
 
+    async checkout(data) {
+        const items = data
+        const ids = items.map((i)=> i.productId)
+        const products = await this.model.findMany({
+            where: {
+                id: {
+                    in: ids
+                }
+            }
+        })
+
+        if(products.length !== ids.length) return false
+
+        const map = new Map(products.map(pr => [pr.id, pr]))
+        const res = []
+        for(const item of items){
+            const product = map.get(item.productId) 
+
+            if(!product) return false
+            if(product.stock < item.quantity) return false
+
+            res.push({...product, quantity: item.quantity})
+        }
+        
+        return res
+    }
 }

@@ -37,9 +37,9 @@ POST http://localhost:3000/auth/register
 Content-Type: application/json
 
 {
-    "name": "Admin",
-    "email": "admin@gmail.com",
-    "password": "admin123"
+    "name": "AdminTest",
+    "email": "admintest@gmail.com",
+    "password": "admintest123"
 }
 
 ###
@@ -47,8 +47,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "name": "Admin",
-    "password": "admin123"
+    "name": "Antonio",
+    "password": "antonio123"
 }
 
 //categories
@@ -120,7 +120,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/products/1
+GET http://localhost:3000/products/
 
 ###
 PUT http://localhost:3000/products/1
@@ -140,3 +140,32 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/products/2
+
+###
+POST http://localhost:3000/orders
+Content-Type: application/json
+
+{
+    "Items":[
+        {"productId": 1, "quantity": 5},
+        {"productId": 8, "quantity": 1}
+    ],
+    "paymentMethod": "CreditCard",
+    "paymentDetails":{
+        "card-number": "4111111111111111",
+        "cvv": "123",
+        "expiration-month": "01",
+        "expiration-year": "2029",
+        "full-name": "APROVED",
+        "currency": "USD",
+        "description": "cool stuff"
+    }
+}
+
+
+###
+GET http://localhost:3000/orders/
+
+###
+
+GET http://localhost:3000/orders?page=1
