@@ -83,6 +83,9 @@ export default class ProductsRepository {
         await prisma.productTags.deleteMany({
             where: { productId: Number(id) }
         });
+        await prisma.orderItem.deleteMany({
+            where: { productId: Number(id) }
+        });
         return await this.model.delete({
             where: {
                 id: parseInt(id)
