@@ -13,6 +13,7 @@ import registerRouter  from "../src/routes/auth.js";
 import categoriesRouter from "../src/routes/categories.js"
 import tagsRouter from "../src/routes/tags.js"
 import productsRouter from "../src/routes/products.js"
+import ordersRouter from "../src/routes/order.js"
 import cors from "cors";
 
 import specs from "../swagger/swagger.js";
@@ -47,4 +48,5 @@ app.use('/auth', registerRouter);
 app.use('/categories', categoriesRouter);
 app.use('/tags', tagsRouter);
 app.use('/', productsRouter);
+app.use('/orders', ordersRouter);
 export default app

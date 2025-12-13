@@ -1,44 +1,36 @@
 import ProductsRepository from "../repositories/productsRepository.js";
+import ProductsBuilder from "../builders/productsQueryBuilder.js";
 import generateSlug from "../../public/javascripts/slug.js"
 const prodRepo = new ProductsRepository()
 
 //Rutas públicas
 
 export async function getProduct(req, res) {
-    try{
-        const page = req.query.page ? parseInt(req.query.page, 10) : 1;
-        const category = req.query.category;
-        const tagsp = req.query.tags;
-        const price_min = req.query.price_min;
-        const price_max = req.query.price_max;
-        const search = req.query.search;
-        const ageRange = req.query.ageRange;
-        const stock = req.query.stock;
-        const sku = req.query.sku;
+    try {
+        const builder = new ProductsBuilder()
+            .setPagination(req.query.page)
+            .filterByCategory(req.query.category)
+            .filterByTags(req.query.tags)
+            .filterByPrice(req.query.price_min, req.query.price_max)
+            .filterBySearch(req.query.search)
+            .filterByAge(req.query.ageRange)
+            .filterByStock(req.query.stock)
+            .filterBySku(req.query.sku);
 
-        const result = await prodRepo.findAllProducts({
-            page,
-            category,
-            tagsp,
-            price_min,
-            price_max,
-            search,
-            ageRange,
-            stock,
-            sku
-        });
+        const query = builder.build();
+        const result = await prodRepo.findAllProducts(query);
 
         return res.status(200).json({
             status: "success",
             data: result.items,
-            meta: result.meta,
+            meta: result.meta
         });
 
     } catch (error) {
-        res.status(500).json({
+        return res.status(500).json({
             status: "error",
-            message: error.message,
-        })
+            message: error.message
+        });
     }
 }
 
@@ -93,7 +85,9 @@ export async function updateProduct(req, res) {
         if(req.body.name) {
             req.body.slug = generateSlug(req.body.name);
         }
-        const putProduct = await prodRepo.productUpdate(req.params.id, req.body);
+        const data = req.body
+        data.id = req.params.id
+        const putProduct = await prodRepo.productUpdate(data);
         res.status(200).json(putProduct)
     } catch (error) {
         res.status(500).json({

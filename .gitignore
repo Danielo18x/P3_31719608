@@ -1,7 +1,6 @@
-dev.db
-prisma/dev.db
 node_modules/
 .env
 /src/generated/prisma
 jsons/
-/generated/
+/generated/prisma
+

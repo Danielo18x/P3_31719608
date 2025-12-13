@@ -182,6 +182,76 @@ const options = {
               }
             }
           }
+        },
+        OrderItem: {
+          type: "object",
+          properties: {
+            id: { type: "integer", example: 1 },
+            orderId: { type: "integer", example: 10 },
+            productId: { type: "integer", example: 1 },
+            quantity: { type: "integer", example: 2 },
+            unitPrice: { type: "number", format: "float", example: 19.99 },
+            product: { $ref: "#/components/schemas/Product" }
+          }
+        },
+        Order: {
+          type: "object",
+          properties: {
+            id: { type: "integer", example: 10 },
+            userId: { type: "integer", example: 1 },
+            totalAmount: { type: "number", format: "float", example: 39.98 },
+            status: { type: "string", enum: ["PENDING", "COMPLETED"], example: "COMPLETED" },
+            Items: { type: "array", items: { $ref: "#/components/schemas/OrderItem" } }
+          }
+        },
+        OrderCreateDTO: {
+          type: "object",
+          required: ["Items"],
+          properties: {
+            Items: {
+              type: "array",
+              items: {
+                type: "object",
+                required: ["productId", "quantity"],
+                properties: {productId: { type: "integer", example: 0 }, quantity: { type: "integer", example: 0 }}
+              }
+            },
+            paymentMethod: { type: "string", example: "CreditCard" },
+            paymentDetails: {
+              type: "object",
+              properties: {
+                "card-number": { type: "string", example: "1234123412341234" },
+                cvv: { type: "string", example: "CVV" },
+                "expiration-month": { type: "string", example: "MM" },
+                "expiration-year": { type: "string", example: "AAAA" },
+                "full-name": { type: "string", example: "string" },
+                currency: { type: "string", example: "USD" },
+                description: { type: "string", example: "string" },
+                reference: { type: "string", example: "string" }
+              }
+            }
+          }
+        },
+        OrdersListResponse: {
+          type: "object",
+          properties: {
+            status: { type: "string", example: "success" },
+            data: {
+              type: "object",
+              properties: {
+                items: { type: "array", items: { $ref: "#/components/schemas/Order" } },
+                meta: {
+                  type: "object",
+                  properties: {
+                    total: { type: "integer", example: 50 },
+                    limit: { type: "integer", example: 20 },
+                    page: { type: "integer", example: 1 },
+                    pages: { type: "integer", example: 3 }
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

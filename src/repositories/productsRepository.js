@@ -1,130 +1,23 @@
-import {PrismaClient} from "@prisma/client"
-
-const prisma = new PrismaClient()
-
+import prisma  from '../lib/prisma.js'
 export default class ProductsRepository {
     constructor(){
         this.model = prisma.product
     }
 
-    async findAllProducts (options = {}) {
-        const {
-            page,
-            category,
-            tagsp,
-            price_min,
-            price_max,
-            search,
-            ageRange,
-            stock,
-            sku
-        } = options;
-
-        const where = {};
-        const limit = 20;
-        const pg = Math.max(1, parseInt(page) || 1);
-        const skip = (pg - 1) * limit;
-
-        //rango de edad
-
-        if (ageRange !== undefined && ageRange !== null && ageRange !== "") {
-            where.ageRange = {};
-            const age = parseInt(ageRange, 10);
-            if (!isNaN(age)) {
-                where.ageRange.gte = age;
-            }
-        }
-
-        //stock
-
-        if (stock !== undefined && stock !== null && stock !== "") {
-            where.stock = {};
-            const stk = parseInt(stock, 10);
-            if (!isNaN(stk)) {
-                where.stock.gte = stk;
-            }
-        }
-
-        //sku
-
-        if (sku !== undefined && sku !== null && sku !== "") {
-            where.sku = {
-                contains: sku.toString(),
-            };
-        }
-
-        if (category !== undefined && category !== null && category !== "") {
-            const catId = parseInt(category);
-            if (!isNaN(catId)) {
-                where.categoryId = catId;
-            } else {
-                where.category = {
-                name: { contains: category.toString() },
-                };
-            }
-        }
-
-        // Tags: accept comma separated string or array of ids
-        if (tagsp !== undefined && tagsp !== null && tagsp !== "") {
-            let ids = [];
-            if (Array.isArray(tagsp)) {
-                ids = tagsp.map((t) => parseInt(t)).filter((n) => !isNaN(n));
-            }  else if (typeof tagsp === "string") {
-                ids = tagsp
-                .split(",")
-                .map((t) => parseInt(t))
-                .filter((n) => !isNaN(n));
-            }
-                
-            if (ids.length > 0) {
-                where.tags = { some: { tagId: { in: ids} } };
-            }
-        }
-
-        // Price range
-        if (
-            (price_min !== undefined && price_min !== null && price_min !== "") ||
-            (price_max !== undefined && price_max !== null && price_max !== "")
-        ) {
-            where.price = {};
-            const pmin = parseInt(price_min);
-            const pmax = parseInt(price_max);
-            if (!isNaN(pmin)) where.price.gte = pmin;
-            if (!isNaN(pmax)) where.price.lte = pmax;
-        }
-
-    // Search in name or description
-        if (search !== undefined && search !== null && search !== "") {
-            where.OR = [
-                { name: { contains: search.toString() } },
-                { description: { contains: search.toString() } },
-            ];
-        }
-
-        const total = await this.model.count({ where });
-
-        const items = await this.model.findMany({
-            skip,
-            take: limit,
-            where,
-            include: {
-                tags: { include: { tag: true } },
-                category: true,
-            },
-            orderBy: { id: "asc" },
-        });
+    async findAllProducts (query) {
+        const {prismaQuery, meta} = query;
+        const total = await this.model.count({ where: prismaQuery.where });
+        const items = await this.model.findMany(prismaQuery);
 
         return {
             items,
             meta: {
                 total,
-                limit: limit,
-                page: pg,
-                pages: Math.ceil(total / limit) || 0,
-            },
-        };
-
-    
+                limit: prismaQuery.take,
+                page: meta.page,
+                pages: Math.ceil(total / prismaQuery.take)
+            }
+        }; 
     }
     
     async addProduct (data) {
@@ -157,10 +50,10 @@ export default class ProductsRepository {
         });
     }
     
-    async productUpdate (id, data) {
+    async productUpdate (data) {
         return await this.model.update({
             where: {
-                id: parseInt(id)
+                id: parseInt(data.id)
             },
             data: {
                 name: data.name,
@@ -175,7 +68,7 @@ export default class ProductsRepository {
                 }),
                 ...(data.tags && {
                     tags: {
-                        deleteMany: {}, // solo se ejecuta si envías tags
+                        deleteMany: {},
                         create: data.tags.map(tagId => ({
                             tag: { connect: { id: tagId } }
                         }))
@@ -197,4 +90,30 @@ export default class ProductsRepository {
         });
     }
 
+    async checkout(data) {
+        const items = data
+        const ids = items.map((i)=> i.productId)
+        const products = await this.model.findMany({
+            where: {
+                id: {
+                    in: ids
+                }
+            }
+        })
+
+        if(products.length !== ids.length) return false
+
+        const map = new Map(products.map(pr => [pr.id, pr]))
+        const res = []
+        for(const item of items){
+            const product = map.get(item.productId) 
+
+            if(!product) return false
+            if(product.stock < item.quantity) return false
+
+            res.push({...product, quantity: item.quantity})
+        }
+        
+        return res
+    }
 }

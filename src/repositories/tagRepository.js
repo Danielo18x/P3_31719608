@@ -1,7 +1,4 @@
-import {PrismaClient} from "@prisma/client"
-
-const prisma = new PrismaClient()
-
+import prisma  from '../lib/prisma.js'
 export default class TagRepository {
     constructor(){
         this.model = prisma.tag
