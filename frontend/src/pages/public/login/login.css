@@ -1,0 +1,17 @@
+/* Archivo auxiliar para la vista de login
+   Se usa Tailwind CSS para la mayoría de estilos.
+   Aquí puedes añadir reglas small si necesitas ajustes específicos.
+*/
+
+@import "tailwindcss";
+
+
+
+:root {
+  --pastel-blue: #e6f0ff;
+  --pastel-purple: #f0e7ff;
+}
+
+.login-custom-shadow {
+  box-shadow: 0 8px 30px rgba(99, 102, 241, 0.08);
+}

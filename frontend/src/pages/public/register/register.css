@@ -1,0 +1,17 @@
+/* Estilos auxiliares para el registro.
+   Usa Tailwind para la mayoría de estilos; aquí variables útiles.
+*/
+@import "tailwindcss";
+
+/*@tailwind base;
+@tailwind components;
+@tailwind utilities;-*/
+
+:root {
+  --pastel-blue: #e6f0ff;
+  --pastel-purple: #f0e7ff;
+}
+
+.register-custom-shadow {
+  box-shadow: 0 8px 30px rgba(124, 58, 237, 0.06);
+}

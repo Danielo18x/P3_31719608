@@ -1,5 +1,6 @@
 import express, {json, urlencoded} from "express" 
-import {join, dirname} from "path" 
+import {join, dirname} from "path"
+import path from "path"
 
 import { fileURLToPath } from "url";
 import cookieParser from "cookie-parser" 
@@ -21,7 +22,7 @@ import "dotenv/config";
 
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+const __dirname = path.dirname(__filename);
 
 var app = express(); 
 app.disable("x-powered-by");
@@ -32,13 +33,33 @@ app.use(
         credentials: true,
     })
 )
-
+app.use(cors({
+  origin: 'http://localhost:5173', // Puerto de tu frontend
+  credentials: true // Necesario para las cookies que mencionaste
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(join(__dirname, '../public')));
+//app.use(express.static(join(__dirname, '../public')));
+
+const buildPath = path.join(__dirname, '../frontend/dist');
+    
+app.use(express.static(buildPath));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+})
+app.get('/dashboard', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
+app.get('/checkout', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
+app.get('/catalog', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
 
 app.use("/api-docs", swagger.serve, swagger.setup(specs));
 app.use('/about', aboutRouter);
@@ -49,4 +70,7 @@ app.use('/categories', categoriesRouter);
 app.use('/tags', tagsRouter);
 app.use('/', productsRouter);
 app.use('/orders', ordersRouter);
+app.get('*', (req, res) => {
+    res.sendFile(path.join(buildPath, 'index.html'));
+});
 export default app

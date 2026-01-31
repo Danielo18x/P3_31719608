@@ -47,7 +47,7 @@ export async function login(req, res){
         res
         .status(200)
         .cookie("tokencito", token, {
-            httpOnly: true,
+            httpOnly: false,
             secure: process.env.NODE_ENV === "production",
             sameSite: "strict",
         })
