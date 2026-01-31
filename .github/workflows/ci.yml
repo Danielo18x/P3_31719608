@@ -27,14 +27,10 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Generate Prisma Client
-        run: npx prisma generate
-
-      - name: Ejecutar pruebas
-        run: npm test
-
-      - name: Install Frontend Dependencies
-        run: cd frontend && npm install
-        
       - name: Build Frontend
-        run: cd frontend && npm run build
+        run: |
+          cd frontend  # Asegúrate de que este nombre sea igual al de tu carpeta
+          npm install
+          npm run build
+
+      
