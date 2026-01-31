@@ -4,6 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "build:prod": "cd frontend && npm install && npm run build && mv dist ../",
     "dev": "nodemon ./src/server.js",
     "start": "node ./src/server.js",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest"
