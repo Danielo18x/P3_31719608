@@ -3,7 +3,7 @@ import Landing from "../pages/public/landing/landing.jsx";
 import Login from "../pages/public/login/login.jsx";
 import Register from "../pages/public/register/register.jsx";
 import Catalog from "../pages/public/catalog/catalog.jsx";
-import Dashboard from "../pages/private/dashboard/dashboard.JSX";
+import Dashboard from "../pages/private/dashboard/dashboard.jsx";
 import Checkout from "../pages/private/checkout/checkout.jsx";
 import Orders from "../pages/private/orders/orders.jsx";
 import Navbar from "../components/Navbar/navbar.jsx";
