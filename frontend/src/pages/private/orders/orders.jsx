@@ -24,7 +24,7 @@ export default function Orders() {
       setError('')
       try {
         const qs = new URLSearchParams({ page: String(page), limit: String(limit) })
-        const res = await fetch(`api/orders?${qs.toString()}`, { signal: controller.signal })
+        const res = await fetch(`https://p3-31719608.onrender.com/api/orders?${qs.toString()}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`Error ${res.status}`)
         const body = await res.json()
         console.log(body)

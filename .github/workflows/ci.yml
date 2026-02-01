@@ -23,11 +23,14 @@ jobs:
         with:
           node-version: 20.19.x
         
-      - name: Build Frontend
-        run: npm run build
-
       - name: Instalar dependencias
         run: npm ci
+
+      - name: Hacer Build
+        run: npm run build
+
+      - name: Ejecutar pruebas
+        run: npm test
 
       
       

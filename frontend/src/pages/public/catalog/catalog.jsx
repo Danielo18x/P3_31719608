@@ -96,7 +96,7 @@ export default function Catalog() {
       try {
         const params = { ...applied, page, limit }
         const qs = buildQuery(params)
-        const res = await fetch(`api/products?${qs}`)
+        const res = await fetch(`https://p3-31719608.onrender.com/api/products?${qs}`)
         if (!res.ok) throw new Error(`Error ${res.status}`)
         const payload = await res.json()
         // La API responde { data: [...] } según ejemplo; también puede devolver { items, total }.

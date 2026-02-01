@@ -73,7 +73,7 @@ export default function Checkout() {
 
     setLoading(true)
     try {
-      const res = await fetch(`api/orders`, {
+      const res = await fetch(`https://p3-31719608.onrender.com/api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
