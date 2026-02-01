@@ -22,11 +22,12 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20.19.x
-
+        
+      - name: Build Frontend
+        run: npm run build
 
       - name: Instalar dependencias
         run: npm ci
 
-      - name: Build Frontend
-        run: npm run build
+      
       
