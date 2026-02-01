@@ -4,15 +4,19 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build:prod": "cd frontend && npm install && npm run build && mv dist ../",
-    "dev": "nodemon ./src/server.js",
+    "dev": "vite",
+    "build": "vite build",
     "start": "node ./src/server.js",
-    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest"
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules npx jest",
+    "lint": "eslint .",
+    "preview": "vite preview"
   },
   "dependencies": {
     "@prisma/adapter-better-sqlite3": "7.1.0",
     "@prisma/client": "7.1.0",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/node": "24.10.2",
+    "@vitejs/plugin-react": "^5.1.2",
     "axios": "1.13.2",
     "bcrypt": "6.0.0",
     "cookie-parser": "1.4.4",
@@ -22,12 +26,24 @@
     "express": "4.16.1",
     "jsonwebtoken": "9.0.2",
     "morgan": "1.9.1",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "react-router-dom": "^7.13.0",
     "sqlite3": "5.1.7",
     "swagger-jsdoc": "6.2.8",
-    "swagger-ui-express": "5.0.1"
+    "swagger-ui-express": "5.0.1",
+    "tailwindcss": "^4.1.18",
+    "vite": "^7.3.1"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/react": "^19.2.10",
+    "@types/react-dom": "^19.2.3",
     "cross-env": "10.1.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.26",
+    "globals": "^17.3.0",
     "jest": "30.2.0",
     "nodemon": "3.1.10",
     "prisma": "7.1.0",

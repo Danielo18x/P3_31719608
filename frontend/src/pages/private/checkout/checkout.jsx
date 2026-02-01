@@ -54,10 +54,6 @@ export default function Checkout() {
       return
     }
 
-    const API_BASE_URL = import.meta.env.MODE === 'development' 
-      ? '/api' 
-      //: 'http://localhost:3000'
-      : 'https://p3-31719608.onrender.com';
 
     const payload = {
       Items: items,
@@ -77,7 +73,7 @@ export default function Checkout() {
 
     setLoading(true)
     try {
-      const res = await fetch(`${API_BASE_URL}/orders`, {
+      const res = await fetch(`api/orders`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

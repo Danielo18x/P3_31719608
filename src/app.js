@@ -44,11 +44,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(join(__dirname, '../public')));
 
-const buildPath = path.join(__dirname, '../frontend/dist');
+const buildPath = path.join(__dirname, '../dist');
     
 app.use(express.static(buildPath));
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 })
 app.get('/dashboard', (req, res) => {
@@ -59,17 +59,17 @@ app.get('/checkout', (req, res) => {
 });
 app.get('/catalog', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
-});
+});*/
 
 app.use("/api-docs", swagger.serve, swagger.setup(specs));
-app.use('/about', aboutRouter);
-app.use('/ping', pingRouter);
-app.use('/users', userRouter);
-app.use('/auth', registerRouter);
-app.use('/categories', categoriesRouter);
-app.use('/tags', tagsRouter);
-app.use('/', productsRouter);
-app.use('/orders', ordersRouter);
+app.use('/api/about', aboutRouter);
+app.use('/api/ping', pingRouter);
+app.use('/api/users', userRouter);
+app.use('/api/auth', registerRouter);
+app.use('/api/categories', categoriesRouter);
+app.use('/api/tags', tagsRouter);
+app.use('/api/', productsRouter);
+app.use('/api/orders', ordersRouter);
 app.get('*', (req, res) => {
     res.sendFile(path.join(buildPath, 'index.html'));
 });

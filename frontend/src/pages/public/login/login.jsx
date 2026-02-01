@@ -22,12 +22,7 @@ export default function Login() {
 
 		setLoading(true);
 		try {
-			const API_BASE_URL = import.meta.env.MODE === 'development' 
-				? '/api' 
-				//: 'http://localhost:3000';
-				: 'https://p3-31719608.onrender.com';
-
-			const res = await fetch(`${API_BASE_URL}/auth/login`, {
+			const res = await fetch(`api/auth/login`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify({ name: form.name, password: form.password }),

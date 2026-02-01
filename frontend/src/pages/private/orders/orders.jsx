@@ -16,7 +16,6 @@ export default function Orders() {
   const [expanded, setExpanded] = useState({})
   const toggle = (id) => setExpanded((s) => ({ ...s, [id]: !s[id] }))
 
-  const API_BASE_URL = import.meta.env.MODE === 'development' ? '/api' : 'http://localhost:3000'
 
   useEffect(() => {
     const controller = new AbortController()
@@ -25,7 +24,7 @@ export default function Orders() {
       setError('')
       try {
         const qs = new URLSearchParams({ page: String(page), limit: String(limit) })
-        const res = await fetch(`${API_BASE_URL}/orders?${qs.toString()}`, { signal: controller.signal })
+        const res = await fetch(`api/orders?${qs.toString()}`, { signal: controller.signal })
         if (!res.ok) throw new Error(`Error ${res.status}`)
         const body = await res.json()
         console.log(body)

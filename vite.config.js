@@ -12,8 +12,6 @@ export default defineConfig({
         target: 'http://localhost:3000',
         changeOrigin: true,
         secure: false,
-        // Si llamas /api/auth/register, esto lo reescribe a /auth/register en el backend
-        rewrite: (path) => path.replace(/^\/api/, '')
       }
     }
   }

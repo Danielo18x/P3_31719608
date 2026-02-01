@@ -6,7 +6,7 @@ export default function NavbarPublic() {
             <div className="flex items-center gap-3">
                 <div className="w-[40px] h-[40px] flex items-center justify-center overflow-hidden">
                     <img 
-                        src="/logo.png" 
+                        src="/images/logo.png" 
                         alt="icon" 
                         className="w-full h-full object-contain rounded-sm" 
                     />

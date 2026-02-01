@@ -36,14 +36,14 @@ export default function Register() {
 
     setLoading(true);
     try {
-      const API_BASE_URL = import.meta.env.MODE === 'development' 
+      /*const API_BASE_URL = import.meta.env.MODE === 'development' 
         ? '/api' 
         //: 'http://localhost:3000';
-        : 'https://p3-31719608.onrender.com';
+        : 'https://p3-31719608.onrender.com';*/
 
 
 
-      const res = await fetch(`${API_BASE_URL}/auth/register`, {
+      const res = await fetch(`api/auth/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
